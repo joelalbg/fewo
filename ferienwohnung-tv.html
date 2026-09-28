@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Willkommen in Götz</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@500;600&family=Inter:wght@400;500;600&display=swap">
+<style>
+:root{--bg:#14211a;--moss:#4f7a45;--leaf:#a9c48f;--sand:#efe6d2;--wood:#7a5232;--gold:#c9a267;--card:rgba(239,230,210,.06);--line:rgba(239,230,210,.2);--txt:#f4efe2;--mut:#c4bda8}
+*{box-sizing:border-box;margin:0;padding:0;border-radius:0}
+html{font-size:min(1.0417vw,1.852vh);background:var(--bg)}
+html,body{height:100%;overflow:hidden}
+body{background:linear-gradient(160deg,#14231b 0%,#1b3024 55%,#2a2118 100%);color:var(--txt);font-family:Inter,system-ui,sans-serif;cursor:none}
+.slide{position:absolute;inset:0;padding:3.4rem 4.5rem 5.6rem;display:flex;flex-direction:column;opacity:0;visibility:hidden;transition:opacity .8s ease,visibility .8s}
+.slide.on{opacity:1;visibility:visible}
+.eyebrow{font-size:1rem;letter-spacing:.32em;text-transform:uppercase;color:var(--gold);font-weight:600;display:flex;align-items:center;gap:1rem}
+.eyebrow:before{content:"";width:3rem;height:2px;background:var(--gold)}
+h1,h2,h3{font-family:"Source Serif 4",Georgia,serif;font-weight:600;line-height:1.1}
+h1{font-size:4.6rem;margin:.8rem 0 1rem}
+h2{font-size:3.2rem;margin:.6rem 0 .3rem}
+.lead{font-size:1.3rem;line-height:1.55;color:var(--mut)}
+.sub{font-size:1.25rem;color:var(--mut);margin-bottom:1.6rem}
+.grid{display:grid;gap:1.3rem;flex:1;min-height:0}
+.g3{grid-template-columns:repeat(3,1fr);grid-template-rows:1fr 1fr}
+.g4{grid-template-columns:repeat(4,1fr)}
+.card{background:var(--card);border:1px solid var(--line);border-top:3px solid var(--gold);display:flex;flex-direction:column;min-height:0;overflow:hidden}
+.card .bd{padding:1.1rem 1.5rem 1.3rem;display:flex;flex-direction:column;gap:.45rem;flex:1}
+.card small,.lbl{font-size:.85rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);font-weight:600}
+.card h3{font-size:1.65rem}
+.card p,.card li{font-size:1.1rem;line-height:1.45;color:var(--mut)}
+.card ul{list-style:none;display:flex;flex-direction:column;gap:.5rem}
+.card li{padding-left:1rem;border-left:2px solid var(--moss)}
+.card li b{color:var(--txt);font-weight:600}
+.ph{background:linear-gradient(135deg,#243d2c,#3a2c1e);background-size:cover;background-position:center;position:relative;flex:1;min-height:6rem}
+.ph:not(.has):after{content:"Foto";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:.9rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(239,230,210,.35);background:repeating-linear-gradient(45deg,transparent 0 14px,rgba(239,230,210,.04) 14px 15px)}
+/* Slide 1 */
+.s1{flex-direction:row;padding:0}
+.s1 .ph{flex:0 0 32%;min-height:0;border-right:3px solid var(--gold)}
+.s1 .r{flex:1;padding:3.4rem 4.5rem 5.6rem 4rem;display:flex;flex-direction:column}
+.s1 .lead{max-width:50rem}
+.info{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;margin-top:auto}
+.wifi{grid-column:1/-1;background:var(--moss);border-top-color:var(--sand)}
+.wifi .bd{flex-direction:row;align-items:center;gap:3rem;padding:1.2rem 1.8rem}
+.wifi small{color:#e3efd3;display:block;margin-bottom:.3rem}
+.wifi strong{font-family:"Source Serif 4",Georgia,serif;font-size:2.2rem;font-weight:600;color:#fff}
+.big{font-family:"Source Serif 4",Georgia,serif;font-size:1.7rem;color:var(--txt);font-weight:600;display:block}
+.host{margin:1.6rem 0 1.8rem;font-size:1.15rem;color:var(--mut)}
+.host b{color:var(--gold);font-weight:600}
+/* Wetter */
+.wx{border-top:1px solid var(--line);padding-top:.7rem;margin-top:auto}
+.wx .now{display:flex;align-items:baseline;gap:.8rem}
+.wx .now b{font-family:"Source Serif 4",Georgia,serif;font-size:2.6rem;color:var(--txt);font-weight:600}
+.wx .now span{font-size:1.05rem;color:var(--mut)}
+.wx .days{display:flex;justify-content:space-between;margin-top:.5rem;font-size:.95rem;color:var(--mut)}
+.wx .days i{font-style:normal;display:flex;flex-direction:column;gap:.15rem}
+.wx .days b{color:var(--txt);font-weight:600}
+.trip{font-size:1rem;color:var(--txt);font-weight:600;padding:.5rem 0;border-top:1px solid var(--line)}
+.note{font-size:.95rem;color:var(--mut);margin-top:.9rem}
+/* Slide 4 */
+.g3c{grid-template-columns:1.15fr 1fr 1.05fr;grid-template-rows:1fr}
+.ph.s{flex:0 0 7.5rem}
+.qrrow{display:flex;gap:1.2rem;align-items:center;margin:.3rem 0 .4rem}
+.qr{width:9.5rem;height:9.5rem;flex:0 0 9.5rem;background:#fff;padding:.5rem}
+.qr img,.qr canvas{width:100%!important;height:100%!important;display:block}
+.rail{display:flex;flex-direction:column;gap:.7rem;margin-top:.3rem}
+.rail div{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid var(--line);padding-bottom:.55rem;font-size:1.12rem;color:var(--mut)}
+.rail b{color:var(--txt);font-weight:600}
+.rail em{font-style:normal;color:var(--gold);font-weight:600}
+/* Footer */
+.foot{position:absolute;left:4.5rem;right:4.5rem;bottom:1.6rem;display:flex;align-items:center;justify-content:space-between;font-size:1rem;color:var(--mut);letter-spacing:.06em}
+.dots{display:flex;gap:.6rem}
+.dots i{width:2rem;height:.25rem;background:var(--line);transition:.4s}
+.dots i.on{background:var(--gold);width:4rem}
+.bar{position:absolute;left:0;bottom:0;height:.3rem;background:var(--gold);width:0}
+</style>
+</head>
+<body>
+
+<section class="slide s1 on">
+  <div class="ph" data-img="hero"></div>
+  <div class="r">
+    <div class="eyebrow">Götz · Brandenburg</div>
+    <h1>Herzlich willkommen</h1>
+    <p class="lead">Wir freuen uns, Sie in unserer Ferienwohnung begrüßen zu dürfen. Die Havelregion mit Wäldern, Wasser und den Städten Potsdam, Werder und Brandenburg liegt direkt vor der Tür. Wir wünschen Ihnen einen erholsamen Aufenthalt.</p>
+    <p class="host">Bei Fragen erreichen Sie uns unter <b data-k="host"></b></p>
+    <div class="info">
+      <div class="card wifi"><div class="bd">
+        <div><small>WLAN-Name</small><strong data-k="wifiName"></strong></div>
+        <div><small>Passwort</small><strong data-k="wifiPass"></strong></div></div></div>
+      <div class="card"><div class="bd"><small>An- und Abreise</small><p>Check-in ab <b class="big" data-k="checkin"></b>Check-out bis <b class="big" data-k="checkout"></b></p></div></div>
+      <div class="card"><div class="bd"><small>Nachtruhe</small><b class="big" data-k="quiet"></b><p>Bitte nehmen Sie Rücksicht auf unsere Nachbarn.</p></div></div>
+      <div class="card"><div class="bd"><small>Hausregeln &amp; Notruf</small><p>Rauchen bitte nur im Freien. Müll bitte trennen.<br>Notruf <b class="big" style="display:inline">112</b></p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="eyebrow">Aktiv in der Region</div>
+  <h2>Aktivitäten in der Umgebung</h2>
+  <p class="sub">Wasser, Wald und weite Wege rund um Götz.</p>
+  <div class="grid g3">
+    <div class="card"><div class="ph" data-img="a1"></div><div class="bd"><small>01</small><h3>Radfahren</h3><p>Ebene Wege durch Wald und Feldflur sowie entlang der Havel.</p></div></div>
+    <div class="card"><div class="ph" data-img="a2"></div><div class="bd"><small>02</small><h3>Kanu &amp; Paddeln</h3><p>Ruhige Touren auf Havel und Seen, Verleih in Werder und Brandenburg.</p></div></div>
+    <div class="card"><div class="ph" data-img="a3"></div><div class="bd"><small>03</small><h3>Bootfahren</h3><p>Rundfahrten mit Fahrgastschiffen und Motorbooten auf den Havelseen.</p></div></div>
+    <div class="card"><div class="ph" data-img="a4"></div><div class="bd"><small>04</small><h3>Angeln</h3><p>Hecht, Zander und Barsch. Ein Fischereischein ist erforderlich.</p></div></div>
+    <div class="card"><div class="ph" data-img="a5"></div><div class="bd"><small>05</small><h3>Baden</h3><p>Badestellen an Havel und Seen der Umgebung im Sommer.</p></div></div>
+    <div class="card"><div class="ph" data-img="a6"></div><div class="bd"><small>06</small><h3>Wandern &amp; Natur</h3><p>Waldwege, Wiesen und Vogelbeobachtung in der Havellandschaft.</p></div></div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="eyebrow">Ausflugsziele</div>
+  <h2>Städte entdecken</h2>
+  <p class="sub">Fahrzeiten ab Bahnhof Götz (RE1) bzw. mit dem Auto, dazu das aktuelle Wetter.</p>
+  <div class="grid g4">
+    <div class="card"><div class="ph" data-img="c1"></div><div class="bd"><h3>Potsdam</h3><p>Schloss Sanssouci, Holländisches Viertel, Welterbe-Parks.</p><div class="trip">Bahn 25 Min. · Auto 30 Min.</div><div class="wx" data-wx="0"></div></div></div>
+    <div class="card"><div class="ph" data-img="c2"></div><div class="bd"><h3>Berlin</h3><p>Museumsinsel, Brandenburger Tor, Kultur und Gastronomie.</p><div class="trip">Bahn 50 Min. · Auto 1 Std.</div><div class="wx" data-wx="1"></div></div></div>
+    <div class="card"><div class="ph" data-img="c3"></div><div class="bd"><h3>Werder (Havel)</h3><p>Inselstadt mit Hafen, Obstwein und Baumblütenfest.</p><div class="trip">Bahn 12 Min. · Auto 15 Min.</div><div class="wx" data-wx="2"></div></div></div>
+    <div class="card"><div class="ph" data-img="c4"></div><div class="bd"><h3>Brandenburg a. d. Havel</h3><p>Dom, Backsteingotik und Wasserwege in der Stadt der Seen.</p><div class="trip">Bahn 7 Min. · Auto 15 Min.</div><div class="wx" data-wx="3"></div></div></div>
+  </div>
+  <p class="note" id="wxnote"></p>
+</section>
+
+<section class="slide">
+  <div class="eyebrow">Genuss &amp; Alltag</div>
+  <h2>Essen, Einkaufen, Mobilität</h2>
+  <p class="sub">Alles für einen entspannten Aufenthalt.</p>
+  <div class="grid g3c">
+    <div class="card"><div class="ph s" data-img="r1"></div><div class="bd"><small>Restaurants</small>
+      <div class="qrrow"><div class="qr" id="qr"></div><p><b style="color:var(--txt)">QR-Code scannen</b> und Restaurants in der Nähe mit Bewertungen und Öffnungszeiten ansehen.</p></div>
+      <ul><li><b>Gasthäuser</b> in Götz und Groß Kreutz</li><li><b>Hafenlokale</b> in Werder (Havel)</li><li><b>Cafés</b> in Brandenburg an der Havel</li></ul></div></div>
+    <div class="card"><div class="ph s" data-img="r2"></div><div class="bd"><small>Einkaufen</small>
+      <ul><li><b>Nahversorger</b> in Groß Kreutz (Havel)</li><li><b>Supermärkte &amp; Läden</b> in Werder und Brandenburg an der Havel</li><li><b>Hofläden</b> mit regionalem Obst und Gemüse</li><li><b>Apotheken &amp; Ärzte</b> in Werder und Brandenburg</li></ul></div></div>
+    <div class="card"><div class="ph s" data-img="r3"></div><div class="bd"><small>Bahn &amp; Bus</small>
+      <div class="rail">
+        <div><span><b>Bahnhof Götz</b> · RE1</span><em>ca. stündlich</em></div>
+        <div><span>Brandenburg Hbf</span><em>7 Min.</em></div>
+        <div><span>Werder (Havel)</span><em>12 Min.</em></div>
+        <div><span>Potsdam Hbf</span><em>25 Min.</em></div>
+        <div><span>Berlin Hbf</span><em>50 Min.</em></div>
+      </div><p style="margin-top:.4rem">Fahrplan: VBB-App oder DB Navigator.</p></div></div>
+  </div>
+</section>
+
+<div class="foot"><div class="dots"><i class="on"></i><i></i><i></i><i></i></div><div id="clock"></div></div>
+<div class="bar" id="bar"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+var CONFIG={
+  wifiName:"FeWo-Goetz",
+  wifiPass:"Passwort-hier-eintragen",
+  checkin:"15:00 Uhr", checkout:"10:00 Uhr", quiet:"22:00 – 07:00 Uhr",
+  host:"Ihr Name · +49 000 0000000",
+  qrUrl:"https://www.google.com/maps/search/Restaurants+G%C3%B6tz+Gro%C3%9F+Kreutz+Havel",
+  seconds:25,
+  /* Bilder: Schlüssel hero, a1-a6, c1-c4, r1-r3 mit Bildadresse oder data:-URI füllen */
+  images:{}
+};
+document.querySelectorAll("[data-k]").forEach(function(e){var v=CONFIG[e.dataset.k];if(v)e.textContent=v});
+document.querySelectorAll("[data-img]").forEach(function(e){var u=CONFIG.images[e.dataset.img];if(u){e.style.backgroundImage="url('"+u+"')";e.classList.add("has")}});
+try{new QRCode(document.getElementById("qr"),{text:CONFIG.qrUrl,width:256,height:256,colorDark:"#14211a",colorLight:"#ffffff",correctLevel:QRCode.CorrectLevel.M})}catch(e){}
+
+/* Wetter: live über Open-Meteo, sonst Momentaufnahme */
+var CITIES=[[52.3906,13.0645],[52.52,13.405],[52.3736,12.9339],[52.4125,12.5316]];
+var SNAP={stamp:"28.09.2026",code:3,d:[
+ [["2026-09-28",25.0,11.9],["2026-09-29",25.3,12.7],["2026-09-30",23.7,12.4],["2026-10-01",24.3,12.0]],
+ [["2026-09-28",24.7,11.9],["2026-09-29",25.3,12.2],["2026-09-30",23.7,12.1],["2026-10-01",24.3,11.8]],
+ [["2026-09-28",25.1,12.3],["2026-09-29",25.2,12.6],["2026-09-30",23.6,12.3],["2026-10-01",24.3,11.9]],
+ [["2026-09-28",25.5,11.3],["2026-09-29",25.2,12.5],["2026-09-30",23.7,12.2],["2026-10-01",24.3,11.8]]]};
+function wt(c){return c==0?"Klar":c<3?"Heiter":c==3?"Bewölkt":c<50?"Nebel":c<60?"Nieselregen":c<70?"Regen":c<80?"Schnee":c<90?"Schauer":"Gewitter"}
+function today(){return new Date().toLocaleDateString("sv-SE")}
+function paint(i,days,code){
+  var el=document.querySelector('[data-wx="'+i+'"]'),t=today();
+  days=days.filter(function(d){return d[0]>=t}).slice(0,4);
+  if(!days.length){el.innerHTML='<div class="now"><span>Keine Wetterdaten</span></div>';return}
+  var h='<div class="now"><b>'+Math.round(days[0][1])+'°</b><span>'+wt(code)+' · Tief '+Math.round(days[0][2])+'°</span></div><div class="days">';
+  days.slice(1).forEach(function(d){var n=new Date(d[0]+"T12:00").toLocaleDateString("de-DE",{weekday:"short"});h+='<i>'+n+'<b>'+Math.round(d[1])+'° / '+Math.round(d[2])+'°</b></i>'});
+  el.innerHTML=h+'</div>';
+}
+function snap(){SNAP.d.forEach(function(d,i){paint(i,d,SNAP.code)});document.getElementById("wxnote").textContent="Wetter: Momentaufnahme vom "+SNAP.stamp+" (Live-Daten nur bei eigenem Hosting)"}
+function live(){
+  var u="https://api.open-meteo.com/v1/forecast?latitude="+CITIES.map(function(c){return c[0]}).join(",")+"&longitude="+CITIES.map(function(c){return c[1]}).join(",")+"&daily=temperature_2m_max,temperature_2m_min,weather_code&timezone=Europe%2FBerlin&forecast_days=4";
+  fetch(u).then(function(r){return r.json()}).then(function(a){
+    a.forEach(function(c,i){var d=c.daily;paint(i,d.time.map(function(x,k){return[x,d.temperature_2m_max[k],d.temperature_2m_min[k]]}),d.weather_code[0])});
+    document.getElementById("wxnote").textContent="Live-Wetter · Quelle Open-Meteo · aktualisiert "+new Date().toLocaleTimeString("de-DE",{hour:"2-digit",minute:"2-digit"})+" Uhr";
+  }).catch(snap);
+}
+snap();live();setInterval(live,1800000);
+
+var slides=[].slice.call(document.querySelectorAll(".slide")),dots=[].slice.call(document.querySelectorAll(".dots i")),bar=document.getElementById("bar"),cur=0,t0=Date.now();
+function show(n){cur=(n+slides.length)%slides.length;slides.forEach(function(s,i){s.classList.toggle("on",i===cur)});dots.forEach(function(d,i){d.classList.toggle("on",i===cur)});t0=Date.now()}
+setInterval(function(){var p=(Date.now()-t0)/(CONFIG.seconds*1000);bar.style.width=Math.min(p*100,100)+"%";if(p>=1)show(cur+1)},100);
+document.addEventListener("keydown",function(e){
+  if(e.key==="ArrowRight"||e.key==="PageDown"||e.key===" ")show(cur+1);
+  else if(e.key==="ArrowLeft"||e.key==="PageUp")show(cur-1);
+  else if(e.key==="f"||e.key==="F"){document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen()}
+  else if(/^[1-4]$/.test(e.key))show(+e.key-1);
+});
+document.addEventListener("click",function(e){show(e.clientX<innerWidth/3?cur-1:cur+1)});
+function tick(){var d=new Date();document.getElementById("clock").textContent=d.toLocaleDateString("de-DE",{weekday:"long",day:"numeric",month:"long"})+" · "+d.toLocaleTimeString("de-DE",{hour:"2-digit",minute:"2-digit"})+" Uhr"}
+tick();setInterval(tick,20000);
+</script>
+</body>
+</html>
